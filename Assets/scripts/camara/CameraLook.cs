@@ -17,6 +17,16 @@ public class CameraLook : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
 
+        // 1. Alinea la rotación del cuerpo del jugador con el frente en el plano horizontal (Eje Y)
+        if (playerBody != null)
+        {
+            Vector3 currentEuler = playerBody.eulerAngles;
+            playerBody.rotation = Quaternion.Euler(0f, currentEuler.y, 0f);
+        }
+
+        // 2. Reinicia la rotación local de la cámara a 0 para que mire recta hacia el frente
+        xRotation = 0f;
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
     }
 
@@ -28,9 +38,9 @@ public class CameraLook : MonoBehaviour
 
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation += mouseY;
+        xRotation -= mouseY;
 
-        xRotation = Mathf.Clamp(xRotation, -90f,90f);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
