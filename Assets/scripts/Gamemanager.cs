@@ -6,6 +6,20 @@ public class Gamemanager : MonoBehaviour
     public static void PlayerDied()
     {
         // Sustituye por tu pantalla de Game Over / jumpscare
+        RestartLevel();
+    }
+
+    public static void RestartLevel()
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public static void QuitGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
