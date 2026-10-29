@@ -4,6 +4,8 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
 
+    public bool canMove = true;
+
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
@@ -17,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        if (!canMove) return;
+
         // Comprobar si tocamos el suelo
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
