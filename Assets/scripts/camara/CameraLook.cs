@@ -10,8 +10,8 @@ public class CameraLook : MonoBehaviour
     public Transform playerBody;
 
     float xRotation = 0;
+    public bool canLook = true;
 
-    
     void Start()
     {
         
@@ -33,6 +33,8 @@ public class CameraLook : MonoBehaviour
     
     void Update()
     {
+        if (!canLook) return;
+
 
         float mouseX = Input.GetAxis("Mouse X")*mouseSensitivity * Time.deltaTime;
 
