@@ -5,6 +5,8 @@ public class Gamemanager : MonoBehaviour
 {
     public static void PlayerDied()
     {
+
+        if (DeathMenu.Instance != null) DeathMenu.Instance.Show();
         // Sustituye por tu pantalla de Game Over / jumpscare
         RestartLevel();
     }
