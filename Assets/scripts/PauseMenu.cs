@@ -29,6 +29,8 @@ public class PauseMenu : MonoBehaviour
 
         if (isPaused) Resume();
         else if (Time.timeScale > 0f) Pause();   // Si ya está congelado (muerte/victoria), no se puede pausar
+
+        if (Input.GetKeyDown(pauseKey)) Debug.Log("Tecla de pausa detectada");
     }
 
     void Pause()

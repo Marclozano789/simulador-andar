@@ -48,6 +48,7 @@ public class Quicktimeevent : MonoBehaviour
 
     public void Begin(Action<bool> onFinished)
     {
+        
         callback = onFinished;
         GenerateSequence();
         index = 0;
@@ -134,6 +135,8 @@ public class Quicktimeevent : MonoBehaviour
 
     void Finish(bool success)
     {
+       
+
         active = false;
 
         if (promptText != null) promptText.gameObject.SetActive(false);
