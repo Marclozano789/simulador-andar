@@ -48,7 +48,7 @@ public class Quicktimeevent : MonoBehaviour
 
     public void Begin(Action<bool> onFinished)
     {
-        
+        Debug.Log("QTE iniciado. Texto asignado: " + (promptText != null));
         callback = onFinished;
         GenerateSequence();
         index = 0;

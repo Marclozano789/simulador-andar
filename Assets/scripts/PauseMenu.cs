@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,12 +26,13 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        
         if (!Input.GetKeyDown(pauseKey)) return;
 
         if (isPaused) Resume();
         else if (Time.timeScale > 0f) Pause();   // Si ya está congelado (muerte/victoria), no se puede pausar
 
-        if (Input.GetKeyDown(pauseKey)) Debug.Log("Tecla de pausa detectada");
+        
     }
 
     void Pause()
@@ -54,6 +56,6 @@ public class PauseMenu : MonoBehaviour
     void GoToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneManager.LoadScene("menu Inicio");
     }
 }
