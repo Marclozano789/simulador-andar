@@ -7,8 +7,9 @@ public class PauseMenu : MonoBehaviour
     [Header("Referencias")]
     public GameObject pausePanel;
     public Button resumeButton;
+    public Button settingsButton;
     public Button mainMenuButton;
-    public Button quitButton;
+    public SettingsMenu settingsMenu;
 
     [Header("Ajustes")]
     public KeyCode pauseKey = KeyCode.Escape;
@@ -20,19 +21,22 @@ public class PauseMenu : MonoBehaviour
     {
         pausePanel.SetActive(false);
         resumeButton.onClick.AddListener(Resume);
+        settingsButton.onClick.AddListener(OpenSettings);
         mainMenuButton.onClick.AddListener(GoToMainMenu);
-        quitButton.onClick.AddListener(Gamemanager.QuitGame);
+        settingsMenu.Closed += OnSettingsClosed;
     }
 
     void Update()
     {
-        
         if (!Input.GetKeyDown(pauseKey)) return;
 
-        if (isPaused) Resume();
+        if (isPaused)
+        {
+            // Si los ajustes están abiertos, Esc los cierra y vuelve a la pausa
+            if (settingsMenu.IsOpen) settingsMenu.Close();
+            else Resume();
+        }
         else if (Time.timeScale > 0f) Pause();   // Si ya está congelado (muerte/victoria), no se puede pausar
-
-        
     }
 
     void Pause()
@@ -57,5 +61,16 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("menu Inicio");
+    }
+
+    void OpenSettings()
+    {
+        pausePanel.SetActive(false);   // Oculta los botones de pausa
+        settingsMenu.Open();
+    }
+
+    void OnSettingsClosed()
+    {
+        pausePanel.SetActive(true);    // Los vuelve a mostrar al volver
     }
 }
